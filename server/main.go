@@ -1,56 +1,81 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
-type Todo struct {
-	ID    int    `json:"id"`
-	Title string `json:"title`
-	Done  bool   `json:"done"`
-	Body  string `json:"body"`
+type Analytics struct {
+	TotalSubscriptions int
+	TotalVisits        int
+}
+
+type EmailRequest struct {
+	Email string `json:"email"`
 }
 
 func main() {
 
 	app := fiber.New()
 
-	todos := []Todo{}
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "http://localhost:3001",
+		AllowHeaders: "Origin, Content-Type, Accept",
+	}))
 
+	// To be removed when database is integrated
+	subscriptions := Analytics{0, 0}
+
+	fmt.Println(subscriptions.TotalSubscriptions)
+
+	// Health check the API
 	app.Get("/healthcheck", func(c *fiber.Ctx) error {
 		return c.SendString("OK")
 	})
 
-	app.Post("/api/todos", func(c *fiber.Ctx) error {
-		todo := &Todo{}
-		if err := c.BodyParser(todo); err != nil {
-			return err
+	// Tracks unique visits
+	app.Get("/api/track-visit", func(c *fiber.Ctx) error {
+		// Check if the visitor has a specific cookie
+		cookie := c.Cookies("unique_visitor")
+		if cookie == "" {
+			// Set a new cookie
+			newCookie := new(fiber.Cookie)
+			newCookie.Name = "unique_visitor"
+			newCookie.Value = "1"
+			newCookie.Expires = time.Now().Add(24 * time.Hour) // Expires in 1 day
+			c.Cookie(newCookie)
+
+			subscriptions.TotalVisits = subscriptions.TotalVisits + 1
 		}
 
-		todo.ID = len(todos) + 1
+		fmt.Println("Tracked visitors. Total: ", subscriptions.TotalVisits)
 
-		todos = append(todos, *todo)
-
-		return c.JSON(todos)
+		return c.SendString(fmt.Sprint(subscriptions.TotalSubscriptions))
 	})
 
-	app.Patch("/api/todos/:id/done", func(c *fiber.Ctx) error {
-		id, err := c.ParamsInt("id")
+	app.Post("/api/subscribe", func(c *fiber.Ctx) error {
+		//Todo check for duplicates
 
-		if err != nil {
-			return c.Status(401).SendString("Invalid id")
+		req := new(EmailRequest)
+
+		// Parse the body into the struct
+		if err := c.BodyParser(req); err != nil {
+			return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 		}
 
-		for i, t := range todos {
-			if t.ID == id {
-				todos[i].Done = true
-				break
-			}
-		}
+		//Record a new subscription
+		subscriptions.TotalSubscriptions = subscriptions.TotalSubscriptions + 1
 
-		return c.JSON(todos)
+		// Use the email from the request
+		fmt.Println("Total subscriptions: ", subscriptions.TotalSubscriptions)
+		fmt.Printf("Received email: %s\n", req.Email)
+
+		// Here you can add logic to handle the email, like storing it in a database
+		return c.SendString(fmt.Sprint(subscriptions.TotalSubscriptions))
 	})
 
 	log.Fatal(app.Listen(":4000"))
