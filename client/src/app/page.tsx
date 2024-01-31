@@ -30,7 +30,7 @@ const fetcher = (url: string) =>
 
 export default function Home() {
   const [ email, setEmail ] = useState<string>("")
-  const [ subscriptions, setSubscriptions ] = useState<string>('')
+  // const [ subscriptions, setSubscriptions ] = useState<string>('')
 
   // Registers every website visit
   const { } = useSWR("api/track-visit", fetcher);
@@ -48,7 +48,7 @@ export default function Home() {
         throw new Error("Network response was not ok");
       }
       const data = await response.text();
-      setSubscriptions(data)
+      // setSubscriptions(data)
     } catch (error) {
       console.error("Error:", error);
     }
@@ -56,13 +56,13 @@ export default function Home() {
 
   return (
     <main>
-      <div
+      {/* <div
         className={`flex justify-center items-center flex-col m-2 ${cn(
           "text-[0.8rem] text-muted-foreground"
         )}`}
       >
         <p>Subscriptions: {subscriptions}</p>
-      </div>
+      </div> */}
       <Tabs defaultValue="account" className="w-[400px]">
         <TabsList className="grid w-full grid-cols-2">
           <TabsTrigger value="account">Email</TabsTrigger>
@@ -71,7 +71,7 @@ export default function Home() {
         <TabsContent value="account">
           <Card>
             <CardHeader>
-              <CardTitle>Email</CardTitle>
+              <CardTitle>Subscribe with Email</CardTitle>
               <CardDescription>
                 Subscribe to recieve uOttawa's Dining Hall menu everyday by
                 email at 6:00am.
@@ -91,7 +91,7 @@ export default function Home() {
         <TabsContent value="password">
           <Card>
             <CardHeader>
-              <CardTitle>SMS</CardTitle>
+              <CardTitle>Subscribe wth SMS</CardTitle>
               <CardDescription>
                 Subscribe to recieve uOttawa's Dining Hall menu everyday by SMS
                 at 6:00am.
