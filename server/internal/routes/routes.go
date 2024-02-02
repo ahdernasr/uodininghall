@@ -46,16 +46,31 @@ func healthcheckHandler(c *fiber.Ctx) error {
 func subscribeHandler(c *fiber.Ctx) error {
 	//Todo check for duplicates
 
-	req := new(queries.User)
+	req := new(queries.Subscriber)
 
 	// Parse the body into the struct
 	if err := c.BodyParser(req); err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
 	}
+	fmt.Printf("Received email to subscribe: %s\n", req.Email)
 
-	// Use the email from the request
-	fmt.Printf("Received email: %s\n", req.Email)
+	queries.AddSubscriber(req.Email)
 
-	// Here you can add logic to handle the email, like storing it in a database
+	return c.SendString("Success")
+}
+
+func unsubscribeHandler(c *fiber.Ctx) error {
+	//Todo check for duplicates
+
+	req := new(queries.Subscriber)
+
+	// Parse the body into the struct
+	if err := c.BodyParser(req); err != nil {
+		return c.Status(fiber.StatusBadRequest).SendString(err.Error())
+	}
+	fmt.Printf("Received email to unsubscribe: %s\n", req.Email)
+
+	queries.RemoveSubscriber(req.Email)
+
 	return c.SendString("Success")
 }

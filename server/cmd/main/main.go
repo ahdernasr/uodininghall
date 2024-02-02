@@ -24,17 +24,19 @@ func main() {
 	// Setup routes
 	routes.SetupRoutes(app)
 
+	// Load connection string frome .env
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal(".env file could not be loaded.")
 	}
 
 	connectionString := os.Getenv("CONNECTION_STRING")
-	fmt.Println(connectionString)
 
 	// Connect to db
 	if err := db.Connect(connectionString); err != nil {
 		log.Fatalf("Could not connect to database: %v", err)
+	} else {
+		fmt.Println("Connected to db!")
 	}
 
 	log.Fatal(app.Listen(":4000"))
