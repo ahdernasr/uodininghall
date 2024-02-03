@@ -67,7 +67,7 @@ func main() {
 			if node != nil {
 				if node.Data == "h4" {
 					stateIndex++
-				} else if node.Data == "h5" {
+				} else {
 					if stateIndex > -1 {
 						switch mealStates[stateIndex] {
 						case "Breakfast":
