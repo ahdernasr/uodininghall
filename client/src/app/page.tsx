@@ -93,7 +93,7 @@ export default function Home() {
             <CardHeader>
               <CardTitle>Subscribe wth SMS</CardTitle>
               <CardDescription>
-                Subscribe to recieve uOttawa's Dining Hall menu everyday by SMS
+                Subscribe to recieve uOttawa&apos;s Dining Hall menu everyday by SMS
                 at 6:00am.
               </CardDescription>
             </CardHeader>
