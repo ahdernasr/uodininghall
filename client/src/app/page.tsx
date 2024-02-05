@@ -18,10 +18,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
-export const ENDPOINT = "http://localhost:4000";
-
 const fetcher = (url: string) =>
-  fetch(`${ENDPOINT}/${url}`).then((res) => {
+  fetch(`http://localhost:4000/${url}`).then((res) => {
     if (!res.ok) {
       throw new Error("An error occurred while fetching the data.");
     }
@@ -37,7 +35,7 @@ export default function Home() {
 
   const handleSubmit = async (email: string) => {
     try {
-      const response = await fetch(`${ENDPOINT}/api/subscribe`, {
+      const response = await fetch(`http://localhost:4000/api/subscribe`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
