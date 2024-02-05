@@ -73,7 +73,7 @@ export default function Home() {
             <CardHeader>
               <CardTitle>Subscribe with Email</CardTitle>
               <CardDescription>
-                Subscribe to recieve uOttawa's Dining Hall menu everyday by
+                Subscribe to recieve uOttawa&apos;s Dining Hall menu everyday by
                 email at 6:00am.
               </CardDescription>
             </CardHeader>
