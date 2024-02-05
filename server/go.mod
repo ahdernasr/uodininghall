@@ -1,6 +1,6 @@
 module github.com/ahdernasr/dailydininghall
 
-go 1.20.13
+go 1.178.4
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.1 // indirect
