@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} flex flex-col justify-center items-center w-full h-full `}>
         <nav className=" ">
-          <h1>Navbar</h1>
+          <h1>Daily Dining Hall</h1>
         </nav>
         {children}
       </body>
