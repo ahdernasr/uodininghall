@@ -180,7 +180,7 @@ func main() {
 
 	})
 
-	// Plant Base - List of items
+	// // Plant Base - List of items
 
 	c.OnHTML("div#cat-3", func(e *colly.HTMLElement) {
 
