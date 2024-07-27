@@ -36,8 +36,6 @@ func SendSimpleMessage(domain, apiKey, publicApiKey string) (string, error) {
 
 func main() {
 	// Replace these with your actual Mailgun domain and API key
-	domain := "sandboxe2100e417b624fa09860f37548c39173.mailgun.org"
-	apiKey := "9a24d4ff262d0431c070f3f82d43f9d2-0f1db83d-333ea510"
 	domain := ""
 	apiKey := ""
 	publicApiKey := "" // Not needed for sending emails
