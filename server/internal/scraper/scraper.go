@@ -1,8 +1,6 @@
 package scraper
 
 import (
-	"encoding/json"
-	"fmt"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -32,7 +30,7 @@ type Menu struct {
 	WorldFlavours Meal `json:"worldFlavours"`
 }
 
-func main() {
+func Scraper() *Menu {
 
 	c := colly.NewCollector()
 
@@ -465,12 +463,13 @@ func main() {
 	c.Visit("https://web.archive.org/web/20230128143243/https://www.uottawa.ca/campus-life/eat-campus/where-eat/dining-hall/menu")
 	c.Wait()
 
-	jsonData, err := json.MarshalIndent(menu, "", "  ")
-	if err != nil {
-		fmt.Println("Error marshalling JSON:", err)
-		return
-	}
-	fmt.Println(string(jsonData))
+	// jsonData, err := json.MarshalIndent(menu, "", "  ")
+	// if err != nil {
+	// 	fmt.Println("Error marshalling JSON:", err)
+	// 	return nil
+	// }
+
+	return menu
 	// fmt.Println(menu)
 }
 
