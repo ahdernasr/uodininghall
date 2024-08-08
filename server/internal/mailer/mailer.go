@@ -144,106 +144,135 @@ func SendMenuEmail(domain, apiKey string, menu *scraper.Menu) (string, error) {
 		<div class="container">
 			<h1>Today's Menu</h1>
 			<h2>Grill</h2>
+			{{if .Grill.Breakfast}}
 			<h3>Breakfast</h3>
 			{{range .Grill.Breakfast}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .Grill.Lunch}}
 			<h3>Lunch</h3>
 			{{range .Grill.Lunch}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .Grill.Dinner}}
 			<h3>Dinner</h3>
 			{{range .Grill.Dinner}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .Grill.Other}}
 			<h3>Special</h3>
 			{{range .Grill.Other}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
 			<h2>Mind Body Soul</h2>
+			{{if .MindBodySoul.Breakfast}}
 			<h3>Breakfast</h3>
 			{{range .MindBodySoul.Breakfast}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .MindBodySoul.Lunch}}
 			<h3>Lunch</h3>
 			{{range .MindBodySoul.Lunch}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .MindBodySoul.Dinner}}
 			<h3>Dinner</h3>
 			{{range .MindBodySoul.Dinner}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .MindBodySoul.Other}}
 			<h3>Special</h3>
 			{{range .MindBodySoul.Other}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
 			<h2>Plant Based</h2>
-			<h3>Breakfast</h3>
-			{{range .PlantBase.Breakfast}}
-				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
-			{{end}}
-			<h3>Lunch</h3>
-			{{range .PlantBase.Lunch}}
-				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
-			{{end}}
-			<h3>Dinner</h3>
-			{{range .PlantBase.Dinner}}
-				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
-			{{end}}
-			<h3>Special</h3>
+			{{if .PlantBase.Other}}
 			{{range .PlantBase.Other}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
 			<h2>Service Minute</h2>
+			{{if .ServiceMinute.Breakfast}}
 			<h3>Breakfast</h3>
 			{{range .ServiceMinute.Breakfast}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .ServiceMinute.Lunch}}
 			<h3>Lunch</h3>
 			{{range .ServiceMinute.Lunch}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .ServiceMinute.Dinner}}
 			<h3>Dinner</h3>
 			{{range .ServiceMinute.Dinner}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .ServiceMinute.Other}}
 			<h3>Special</h3>
 			{{range .ServiceMinute.Other}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
 			<h2>Trattoria</h2>
+			{{if .Trattoria.Breakfast}}
 			<h3>Breakfast</h3>
 			{{range .Trattoria.Breakfast}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .Trattoria.Lunch}}
 			<h3>Lunch</h3>
 			{{range .Trattoria.Lunch}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .Trattoria.Dinner}}
 			<h3>Dinner</h3>
 			{{range .Trattoria.Dinner}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .Trattoria.Other}}
 			<h3>Special</h3>
 			{{range .Trattoria.Other}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
 			<h2>World Flavours</h2>
+			{{if .WorldFlavours.Breakfast}}
 			<h3>Breakfast</h3>
 			{{range .WorldFlavours.Breakfast}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .WorldFlavours.Lunch}}
 			<h3>Lunch</h3>
 			{{range .WorldFlavours.Lunch}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .WorldFlavours.Dinner}}
 			<h3>Dinner</h3>
 			{{range .WorldFlavours.Dinner}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
 			{{end}}
+			{{end}}
+			{{if .WorldFlavours.Other}}
 			<h3>Special</h3>
 			{{range .WorldFlavours.Other}}
 				<p><strong>{{.Name}}</strong>: {{.Description}} (Allergies: {{.Allergies}})</p>
+			{{end}}
 			{{end}}
 		</div>
 	</body>
