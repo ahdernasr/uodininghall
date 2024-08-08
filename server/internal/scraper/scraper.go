@@ -321,7 +321,7 @@ func Scraper() *Menu {
 
 	// Trattoria - Breakfast, Lunch, Dinner
 
-	c.OnHTML("div#cat-6", func(e *colly.HTMLElement) {
+	c.OnHTML("div#cat-5", func(e *colly.HTMLElement) {
 
 		mealStates := map[string]string{
 			"Breakfast": "Breakfast",
