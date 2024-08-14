@@ -1,7 +1,7 @@
 package mailer
 
-func GetWelcomeTemplate() string {
-	welcomeTemplate := `
+func GetSubscribeTemplate() string {
+	subscribeTemplate := `
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,7 @@ h1 {
 </body>
 </html>`
 
-	return welcomeTemplate
+	return subscribeTemplate
 }
 
 func getMenuTemplate() string {
