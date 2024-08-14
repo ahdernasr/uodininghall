@@ -1,6 +1,8 @@
 package queries
 
 import (
+	"fmt"
+
 	"github.com/ahdernasr/dailydininghall/internal/db"
 	_ "github.com/lib/pq"
 )
@@ -34,11 +36,26 @@ func GetAllSubscribers() ([]Subscriber, error) {
 }
 
 func AddSubscriber(email string) error {
-	statement := `INSERT INTO Subscribers (email) values ($1)`
-	_, err := db.DB.Exec(statement, email)
+	// Query to check if the email already exists
+	var exists bool
+	checkQuery := `SELECT EXISTS(SELECT 1 FROM Subscribers WHERE email=$1)`
+	err := db.DB.QueryRow(checkQuery, email).Scan(&exists)
 	if err != nil {
-		panic(err)
+		return err // Return error if query fails
 	}
+
+	// If email already exists, return an error
+	if exists {
+		return fmt.Errorf("email %s already exists in the mailing list", email)
+	}
+
+	// If email does not exist, proceed to insert
+	insertQuery := `INSERT INTO Subscribers (email) values ($1)`
+	_, err = db.DB.Exec(insertQuery, email)
+	if err != nil {
+		return err // Return error if insertion fails
+	}
+
 	return nil
 }
 
