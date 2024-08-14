@@ -13,6 +13,7 @@ func SetupRoutes(app *fiber.App) {
 
 	// Register new subsciber
 	app.Post("/api/subscribe", subscribeHandler)
+	app.Post("/api/unsubscribe", unsubscribeHandler)
 
 	// Tracks unique visits
 	// app.Get("/api/track-visit", trackVisitHandler)

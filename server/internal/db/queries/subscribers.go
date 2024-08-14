@@ -43,7 +43,7 @@ func AddSubscriber(email string) error {
 }
 
 func RemoveSubscriber(email string) error {
-	statement := `REMOVE FROM Subscribers WHERE email=$1`
+	statement := `DELETE FROM Subscribers WHERE email=$1`
 	_, err := db.DB.Exec(statement, email)
 	if err != nil {
 		panic(err)
