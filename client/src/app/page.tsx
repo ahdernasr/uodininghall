@@ -30,12 +30,18 @@ const fetcher = (url: string) =>
 export default function Home() {
   const { toast } = useToast();
   const [email, setEmail] = useState<string>("");
-  // const [ subscriptions, setSubscriptions ] = useState<string>('')
-
-  // Registers every website visit
-  // const {} = useSWR("api/track-visit", fetcher);
+  const [lock, setLock] = useState(false);
 
   const handleSubmit = async (email: string) => {
+    if (lock) {
+      toast({
+        title: "Subscribe cooldown",
+        description: "Please wait a moment before clicking again.",
+        duration: 3000,
+      });
+      return;
+    }
+
     try {
       if (!validateEmail(email)) {
         toast({
@@ -67,6 +73,8 @@ export default function Home() {
       });
 
       setEmail("");
+      lockButton(10);
+
     } catch (error) {
       toast({
         title: "Error: Could not subscribe",
@@ -75,6 +83,7 @@ export default function Home() {
       });
 
       setEmail("");
+      lockButton(3)
     }
   };
 
@@ -114,6 +123,13 @@ export default function Home() {
     }
 
     return true;
+  };
+
+  const lockButton = (duration: number) => {
+    setLock(true);
+    setTimeout((): void => {
+      setLock(false);
+    }, duration * 1000);
   };
 
   return (
