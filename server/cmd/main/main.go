@@ -16,7 +16,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
-	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -48,13 +47,14 @@ func main() {
 	// Setup routes
 	routes.SetupRoutes(app)
 
+	// ADD THIS IF IN DEVELOPMENT
 	// Load connection string frome .env
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(".env file could not be loaded.", err)
-	} else {
-		fmt.Printf(".env file loaded 1")
-	}
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal(".env file could not be loaded.", err)
+	// } else {
+	// 	fmt.Printf(".env file loaded 1")
+	// }
 
 	connectionString := os.Getenv("CONNECTION_STRING")
 
@@ -89,12 +89,14 @@ func main() {
 
 func daily() {
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal(".env file could not be loaded.", err)
-	} else {
-		fmt.Printf(".env file loaded 2")
-	}
+	// ADD THIS IF IN DEVELOPMENT
+
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal(".env file could not be loaded.", err)
+	// } else {
+	// 	fmt.Printf(".env file loaded 2")
+	// }
 
 	domain := os.Getenv("EMAIL_DOMAIN")
 	apiKey := os.Getenv("EMAIL_API_KEY")
