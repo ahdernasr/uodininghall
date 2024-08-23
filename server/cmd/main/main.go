@@ -87,9 +87,13 @@ func main() {
 
 func daily() {
 
-	// Keys
-	domain := "sandbox314528bf85614e73b0a63061fb8c323a.mailgun.org"
-	apiKey := "b217988e98c92f971cfff1432c105353-afce6020-b5e3a061"
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(".env file could not be loaded.")
+	}
+
+	domain := os.Getenv("EMAIL_DOMAIN")
+	apiKey := os.Getenv("EMAIL_API_KEY")
 
 	// Run the scraper to get the menu
 	/* TODO Add error checking here */
@@ -108,4 +112,5 @@ func daily() {
 	}
 
 	fmt.Printf("Emails sent successfully!")
+
 }
