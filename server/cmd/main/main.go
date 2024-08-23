@@ -51,7 +51,9 @@ func main() {
 	// Load connection string frome .env
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal(".env file could not be loaded.")
+		log.Fatal(".env file could not be loaded.", err)
+	} else {
+		fmt.Printf(".env file loaded 1")
 	}
 
 	connectionString := os.Getenv("CONNECTION_STRING")
@@ -89,7 +91,9 @@ func daily() {
 
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal(".env file could not be loaded.")
+		log.Fatal(".env file could not be loaded.", err)
+	} else {
+		fmt.Printf(".env file loaded 2")
 	}
 
 	domain := os.Getenv("EMAIL_DOMAIN")
