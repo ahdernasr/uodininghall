@@ -15,6 +15,7 @@ import (
 	"github.com/ahdernasr/dailydininghall/internal/scraper"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/joho/godotenv"
 )
 
@@ -24,9 +25,24 @@ func main() {
 
 	app := fiber.New()
 
+	// Cors
 	app.Use(cors.New(cors.Config{
 		AllowOrigins: "http://localhost:3000",
 		AllowHeaders: "Origin, Content-Type, Accept",
+	}))
+
+	// Rate limiter
+	app.Use(limiter.New(limiter.Config{
+		Max:        10,               // Max requests per duration
+		Expiration: 30 * time.Second, // Duration before the rate limit resets
+		KeyGenerator: func(c *fiber.Ctx) string {
+			return c.IP() // Rate limit by IP address
+		},
+		LimitReached: func(c *fiber.Ctx) error {
+			return c.Status(fiber.StatusTooManyRequests).JSON(fiber.Map{
+				"error": "Too many requests, please try again later.",
+			})
+		},
 	}))
 
 	// Setup routes
