@@ -18,6 +18,9 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
+// const URL = "http://127.0.0.1:4000"
+const URL = "https://uodininghall.live/uodininghall-server";
+
 export default function Unsubscribe() {
   const { toast } = useToast();
   const [email, setEmail] = useState<string>("");
@@ -34,7 +37,7 @@ export default function Unsubscribe() {
         return;
       }
 
-      const response = await fetch(`http://localhost:4000/api/unsubscribe`, {
+      const response = await fetch(`${URL}/api/unsubscribe`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

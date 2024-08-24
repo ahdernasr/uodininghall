@@ -19,13 +19,16 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 
-const fetcher = (url: string) =>
-  fetch(`http://localhost:4000/${url}`).then((res) => {
-    if (!res.ok) {
-      throw new Error("An error occurred while fetching the data.");
-    }
-    return res.text();
-  });
+// const fetcher = (url: string) =>
+//   fetch(`http://localhost:4000/${url}`).then((res) => {
+//     if (!res.ok) {
+//       throw new Error("An error occurred while fetching the data.");
+//     }
+//     return res.text();
+//   });
+
+// const URL = "http://127.0.0.1:4000"
+const URL = "https://uodininghall.live/uodininghall-server";
 
 export default function Home() {
   const { toast } = useToast();
@@ -53,7 +56,7 @@ export default function Home() {
         return;
       }
 
-      const response = await fetch(`http://localhost:4000/api/subscribe`, {
+      const response = await fetch(`${URL}/api/subscribe`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
