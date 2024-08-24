@@ -7,18 +7,26 @@ import (
 	"time"
 
 	"github.com/ahdernasr/dailydininghall/internal/db"
-	"github.com/ahdernasr/dailydininghall/internal/routes"
-	"github.com/robfig/cron/v3"
-
 	"github.com/ahdernasr/dailydininghall/internal/db/queries"
 	"github.com/ahdernasr/dailydininghall/internal/mailer"
+	"github.com/ahdernasr/dailydininghall/internal/routes"
 	"github.com/ahdernasr/dailydininghall/internal/scraper"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
+
+	// "github.com/joho/godotenv"
+	"github.com/robfig/cron/v3"
 )
 
 func main() {
+
+	// ADD THIS IF IN DEVELOPMENT
+	// Load connection string frome .env
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal(".env file could not be loaded.", err)
+	// }
 
 	/* SERVER */
 
@@ -26,7 +34,7 @@ func main() {
 
 	// Cors
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:3000",
+		AllowOrigins: os.Getenv("CLIENT_URL"),
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
@@ -46,15 +54,6 @@ func main() {
 
 	// Setup routes
 	routes.SetupRoutes(app)
-
-	// ADD THIS IF IN DEVELOPMENT
-	// Load connection string frome .env
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal(".env file could not be loaded.", err)
-	// } else {
-	// 	fmt.Printf(".env file loaded 1")
-	// }
 
 	connectionString := os.Getenv("CONNECTION_STRING")
 
@@ -94,8 +93,6 @@ func daily() {
 	// err := godotenv.Load()
 	// if err != nil {
 	// 	log.Fatal(".env file could not be loaded.", err)
-	// } else {
-	// 	fmt.Printf(".env file loaded 2")
 	// }
 
 	domain := os.Getenv("EMAIL_DOMAIN")
