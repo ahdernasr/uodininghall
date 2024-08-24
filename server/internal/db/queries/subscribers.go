@@ -36,12 +36,13 @@ func GetAllSubscribers() ([]Subscriber, error) {
 }
 
 func AddSubscriber(email string) error {
+
 	// Query to check if the email already exists
 	var exists bool
 	checkQuery := `SELECT EXISTS(SELECT 1 FROM Subscribers WHERE email=$1)`
 	err := db.DB.QueryRow(checkQuery, email).Scan(&exists)
 	if err != nil {
-		return err // Return error if query fails
+		return nil // Return so its not added
 	}
 
 	// If email already exists, return an error
