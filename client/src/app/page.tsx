@@ -85,6 +85,8 @@ export default function Home() {
         duration: 3000,
       });
 
+      console.log(error)
+
       setEmail("");
       lockButton(3)
     }
