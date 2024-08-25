@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"html/template"
+	"os"
 	"strings"
 	"sync"
 	"time"
@@ -13,7 +14,18 @@ import (
 	"github.com/mailgun/mailgun-go/v4"
 )
 
-func SendMenuEmail(domain, apiKey string, menu *scraper.Menu, subscribers []queries.Subscriber) error {
+func SendMenuEmail(menu *scraper.Menu, subscribers []queries.Subscriber) error {
+
+	// ADD THIS IF IN DEVELOPMENT
+
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal(".env file could not be loaded.", err)
+	// }
+
+	domain := os.Getenv("EMAIL_DOMAIN")
+	apiKey := os.Getenv("EMAIL_API_KEY")
+
 	// Initialize the Mailgun client
 	mg := mailgun.NewMailgun(domain, apiKey)
 
@@ -49,7 +61,7 @@ func SendMenuEmail(domain, apiKey string, menu *scraper.Menu, subscribers []quer
 			defer wg.Done()
 
 			m := mg.NewMessage(
-				"School Cafeteria <mailgun@sandbox314528bf85614e73b0a63061fb8c323a.mailgun.org>", // Sender's email
+				"UO Dining Hall <menu@mail.uodininghall.live>", // Sender's email
 				"Today's Menu", // Subject
 				"Hello, please view this email in HTML format.", // Plain-text body
 				subscriber.Email, // Recipient's email
@@ -81,7 +93,18 @@ func SendMenuEmail(domain, apiKey string, menu *scraper.Menu, subscribers []quer
 	return nil
 }
 
-func SendSubscribeEmail(domain, apiKey string, menu *scraper.Menu) (string, error) {
+func SendSubscribeEmail(email string) (string, error) {
+
+	// ADD THIS IF IN DEVELOPMENT
+
+	// err := godotenv.Load()
+	// if err != nil {
+	// 	log.Fatal(".env file could not be loaded.", err)
+	// }
+
+	domain := os.Getenv("EMAIL_DOMAIN")
+	apiKey := os.Getenv("EMAIL_API_KEY")
+
 	// Initialize the Mailgun client
 	mg := mailgun.NewMailgun(domain, apiKey)
 
@@ -96,7 +119,7 @@ func SendSubscribeEmail(domain, apiKey string, menu *scraper.Menu) (string, erro
 
 	// Create a string builder to capture the output
 	var bodyBuilder strings.Builder
-	err = t.Execute(&bodyBuilder, menu)
+	err = t.Execute(&bodyBuilder, nil)
 	if err != nil {
 		return "", fmt.Errorf("failed to execute template: %v", err)
 	}
@@ -106,10 +129,10 @@ func SendSubscribeEmail(domain, apiKey string, menu *scraper.Menu) (string, erro
 
 	// Create a new email message with the custom body
 	m := mg.NewMessage(
-		"School Cafeteria <mailgun@sandbox314528bf85614e73b0a63061fb8c323a.mailgun.org>", // Sender's email
-		"Today's Menu", // Subject
-		"Hello, please view this email in HTML format.", // HTML body
-		"ahdernasr@gmail.com",                           // Recipient's email
+		"UO Dining Hall <no-reply@mail.uodininghall.live>", // Sender's email
+		"Subscription confirmation",                        // Subject
+		"Hello, please view this email in HTML format.",    // HTML body
+		email, // Recipient's email
 	)
 
 	m.SetHtml(emailBody)

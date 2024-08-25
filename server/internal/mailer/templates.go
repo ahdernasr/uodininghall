@@ -48,7 +48,7 @@ h1 {
 </head>
 <body>
 	<div class="container">
-		You have subscribed to UO Dining Hall.
+		Subscription successful.
 	</div>
 </body>
 </html>`

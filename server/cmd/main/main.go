@@ -89,16 +89,6 @@ func main() {
 
 func daily() {
 
-	// ADD THIS IF IN DEVELOPMENT
-
-	// err := godotenv.Load()
-	// if err != nil {
-	// 	log.Fatal(".env file could not be loaded.", err)
-	// }
-
-	domain := os.Getenv("EMAIL_DOMAIN")
-	apiKey := os.Getenv("EMAIL_API_KEY")
-
 	// Run the scraper to get the menu
 	/* TODO Add error checking here */
 	menu := scraper.Scraper()
@@ -110,7 +100,7 @@ func daily() {
 	}
 
 	// Send the menu to all subscribers
-	err2 := mailer.SendMenuEmail(domain, apiKey, menu, subscribers)
+	err2 := mailer.SendMenuEmail(menu, subscribers)
 	if err2 != nil {
 		log.Fatalf("Could not send email: %v", err2)
 	}

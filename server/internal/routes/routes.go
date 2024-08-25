@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ahdernasr/dailydininghall/internal/db/queries"
+	"github.com/ahdernasr/dailydininghall/internal/mailer"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -32,6 +33,8 @@ func subscribeHandler(c *fiber.Ctx) error {
 	fmt.Printf("Received email to subscribe: %s\n", req.Email)
 
 	err := queries.AddSubscriber(req.Email)
+
+	mailer.SendSubscribeEmail(req.Email)
 
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString("Email is already subscribed.")
