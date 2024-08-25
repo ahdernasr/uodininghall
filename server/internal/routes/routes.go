@@ -34,12 +34,11 @@ func subscribeHandler(c *fiber.Ctx) error {
 
 	err := queries.AddSubscriber(req.Email)
 
-	mailer.SendSubscribeEmail(req.Email)
-
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).SendString("Email is already subscribed.")
 	}
 
+	mailer.SendSubscribeEmail(req.Email)
 	return c.SendString("Success")
 }
 
