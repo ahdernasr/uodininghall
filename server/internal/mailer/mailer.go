@@ -95,6 +95,8 @@ func SendMenuEmail(menu *scraper.Menu, subscribers []queries.Subscriber) error {
 
 func SendSubscribeEmail(email string) error {
 
+	fmt.Println("Test")
+
 	// ADD THIS IF IN DEVELOPMENT
 
 	// err := godotenv.Load()

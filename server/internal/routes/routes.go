@@ -9,10 +9,8 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-	// Health check the API
 	app.Get("/healthcheck", healthcheckHandler)
 
-	// Register new subsciber
 	app.Post("/api/subscribe", subscribeHandler)
 	app.Post("/api/unsubscribe", unsubscribeHandler)
 }
