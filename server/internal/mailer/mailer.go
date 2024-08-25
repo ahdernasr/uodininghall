@@ -93,7 +93,7 @@ func SendMenuEmail(menu *scraper.Menu, subscribers []queries.Subscriber) error {
 	return nil
 }
 
-func SendSubscribeEmail(email string) (string, error) {
+func SendSubscribeEmail(email string) error {
 
 	// ADD THIS IF IN DEVELOPMENT
 
@@ -114,14 +114,14 @@ func SendSubscribeEmail(email string) (string, error) {
 	// Parse the template
 	t, err := template.New("email").Parse(tmpl)
 	if err != nil {
-		return "", fmt.Errorf("failed to parse template: %v", err)
+		return fmt.Errorf("failed to parse template: %v", err)
 	}
 
 	// Create a string builder to capture the output
 	var bodyBuilder strings.Builder
 	err = t.Execute(&bodyBuilder, nil)
 	if err != nil {
-		return "", fmt.Errorf("failed to execute template: %v", err)
+		return fmt.Errorf("failed to execute template: %v", err)
 	}
 
 	// Get the final email body from the builder
@@ -142,10 +142,10 @@ func SendSubscribeEmail(email string) (string, error) {
 	defer cancel()
 
 	// Send the message
-	_, id, err := mg.Send(ctx, m)
+	_, _, err = mg.Send(ctx, m)
 	if err != nil {
-		return "", fmt.Errorf("failed to send email: %v", err)
+		return fmt.Errorf("failed to send email: %v", err)
 	}
 
-	return id, nil
+	return nil
 }
