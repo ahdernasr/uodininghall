@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,32 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        {/* HTML Meta Tags */}
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="description"
+          content="Sign up to be mailed uOttawa's dining hall menu daily."
+        />
+        <meta name="keywords" content="Next.js, SEO, OpenGraph, Twitter" />
+        {/* <meta name="author" content="AN" /> */}
+
+        {/* OpenGraph Meta Tags */}
+        <meta property="og:title" content="UO Dining Hall" />
+        <meta
+          property="og:description"
+          content="Sign up to be mailed uOttawa's dining hall menu daily."
+        />
+        {/* <meta
+        //   property="og:image"
+        //   content="https://example.com/your-image.jpg"
+        // /> */}
+        <meta property="og:url" content="https://uodininghall.live/" />
+        <meta property="og:type" content="website" />
+
+        <title>Your Page Title</title>
+      </Head>
       <body className={`${inter.className} relate w-full h-full m-0 p-0 `}>
         {children}
         <svg
