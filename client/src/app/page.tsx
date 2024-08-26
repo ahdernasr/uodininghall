@@ -138,10 +138,10 @@ export default function Home() {
   return (
     <>
       <main className="flex flex-col justify-center items-center gap-y-5">
-        <h1 className="text-[4rem] text-[#8F001A] font-bold ">
+        <h1 className="text-[2.75rem] sm:text-[4rem] text-[#8F001A] font-bold ">
           UO Dining Hall
         </h1>
-        <Tabs defaultValue="account" className="w-[400px]">
+        <Tabs defaultValue="account" className="w-[350px] sm:w-[400px]">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="account">Email</TabsTrigger>
             <TabsTrigger value="password">SMS</TabsTrigger>

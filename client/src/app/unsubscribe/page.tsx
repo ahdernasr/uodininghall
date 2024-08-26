@@ -107,7 +107,7 @@ export default function Unsubscribe() {
 
   return (
     <main className="flex flex-col justify-center items-center gap-y-5">
-      <h1 className="text-[4rem] text-[#8F001A] font-bold ">UO Dining Hall</h1>
+      <h1 className="text-[2.75rem] sm:text-[4rem] text-[#8F001A] font-bold ">UO Dining Hall</h1>
       <Card className="mt-[3%]">
         <CardHeader>
           <CardTitle>Unsubscribe</CardTitle>
