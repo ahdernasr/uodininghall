@@ -27,6 +27,18 @@ h1 {
 	padding: 10px;
 	border-radius: 10px;
 }
+h2 {
+	color: black;
+	padding: 10px;
+}
+
+h3 {
+	color: black;
+	padding: 10px;
+}
+a {
+	color: #8F001A; /* University of Ottawa's Garnet */;
+}
 
 /* Dark mode styles */
 @media (prefers-color-scheme: dark) {
@@ -48,7 +60,8 @@ h1 {
 </head>
 <body>
 	<div class="container">
-		Subscription successful.
+		<h2>Subscription successful.<h2>
+		<h3>Changed your mind? <a href="https://uodininghall.live/unsubscribe">Unsubscribe<a><h3>
 	</div>
 </body>
 </html>`
@@ -267,6 +280,7 @@ p strong {
 		{{end}}
 		{{end}}
 	</div>
+	<h3><a href="https://uodininghall.live/unsubscribe">Unsubscribe<a><h3>
 </body>
 </html>`
 	return menuTemplate
