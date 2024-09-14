@@ -33,15 +33,15 @@ func main() {
 	app := fiber.New()
 
 	// HTTPS redirection middleware
-	app.Use(func(c *fiber.Ctx) error {
-		// Check if the X-Forwarded-Proto header is set to "https"
-		if c.Get("X-Forwarded-Proto") != "https" {
-			// Redirect to the HTTPS version of the URL
-			return c.Redirect("https://"+c.Hostname()+c.OriginalURL(), fiber.StatusMovedPermanently)
-		}
-		// Continue with the next handler if the request is secure
-		return c.Next()
-	})
+	// app.Use(func(c *fiber.Ctx) error {
+	// 	// Check if the X-Forwarded-Proto header is set to "https"
+	// 	if c.Get("X-Forwarded-Proto") != "https" {
+	// 		// Redirect to the HTTPS version of the URL
+	// 		return c.Redirect("https://"+c.Hostname()+c.OriginalURL(), fiber.StatusMovedPermanently)
+	// 	}
+	// 	// Continue with the next handler if the request is secure
+	// 	return c.Next()
+	// })
 
 	// Cors
 	app.Use(cors.New(cors.Config{

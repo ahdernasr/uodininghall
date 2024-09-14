@@ -9,14 +9,14 @@ import (
 )
 
 func SetupRoutes(app *fiber.App) {
-	app.Get("/healthcheck", healthcheckHandler)
+	app.Get("/health", healthcheckHandler)
 
 	app.Post("/api/subscribe", subscribeHandler)
 	app.Post("/api/unsubscribe", unsubscribeHandler)
 }
 
 func healthcheckHandler(c *fiber.Ctx) error {
-	return c.SendString("OK")
+	return c.SendStatus(200)
 }
 
 func subscribeHandler(c *fiber.Ctx) error {
