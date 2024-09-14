@@ -78,7 +78,7 @@ func main() {
 
 	/* CRON SCHEDULER */
 
-	location, err := time.LoadLocation("Africa/Cairo") // Use the appropriate timezone
+	location, err := time.LoadLocation("America/Toronto") // Use the appropriate timezone
 	if err != nil {
 		log.Fatalf("Failed to load location: %v", err)
 	}
