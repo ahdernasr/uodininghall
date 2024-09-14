@@ -459,8 +459,8 @@ func Scraper() *Menu {
 
 	})
 
-	// c.Visit("https://www.uottawa.ca/campus-life/eat-campus/where-eat/dining-hall/menu")
-	c.Visit("https://web.archive.org/web/20230128143243/https://www.uottawa.ca/campus-life/eat-campus/where-eat/dining-hall/menu")
+	c.Visit("https://www.uottawa.ca/campus-life/eat-campus/where-eat/dining-hall/menu")
+	// c.Visit("https://web.archive.org/web/20230128143243/https://www.uottawa.ca/campus-life/eat-campus/where-eat/dining-hall/menu")
 	c.Wait()
 
 	// jsonData, err := json.MarshalIndent(menu, "", "  ")
