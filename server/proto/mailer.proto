@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package mailer;
+
+option go_package = "github.com/ahdernasr/dailydininghall/server/proto/gen;pb";
+
+import "menu.proto";
+import "subscribers.proto";
+
+message SendMenuEmailRequest {
+  menu.Menu menu = 1;
+  repeated subscribers.Subscriber subscribers = 2;
+}
+
+message SendMenuEmailResponse {}
+
+message SendSubscribeEmailRequest {
+  string email = 1;
+}
+
+message SendSubscribeEmailResponse {}
+
+service MailerService {
+  rpc SendMenuEmail(SendMenuEmailRequest) returns (SendMenuEmailResponse);
+  rpc SendSubscribeEmail(SendSubscribeEmailRequest) returns (SendSubscribeEmailResponse);
+}
+
+

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package subscribers;
+
+option go_package = "github.com/ahdernasr/dailydininghall/server/proto/gen;pb";
+
+message Subscriber {
+  string email = 1;
+}
+
+message AddSubscriberRequest {
+  string email = 1;
+}
+
+message RemoveSubscriberRequest {
+  string email = 1;
+}
+
+message ListSubscribersRequest {}
+
+message ListSubscribersResponse {
+  repeated Subscriber subscribers = 1;
+}
+
+message Empty {}
+
+service SubscribersService {
+  rpc AddSubscriber(AddSubscriberRequest) returns (Empty);
+  rpc RemoveSubscriber(RemoveSubscriberRequest) returns (Empty);
+  rpc ListSubscribers(ListSubscribersRequest) returns (ListSubscribersResponse);
+}
+
+

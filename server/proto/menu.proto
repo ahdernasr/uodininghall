@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package menu;
+
+option go_package = "github.com/ahdernasr/dailydininghall/server/proto/gen;pb";
+
+message Dish {
+  string name = 1;
+  string description = 2;
+  string allergies = 3;
+}
+
+message Meal {
+  repeated Dish breakfast = 1;
+  repeated Dish lunch = 2;
+  repeated Dish dinner = 3;
+  repeated Dish other = 4;
+}
+
+message Menu {
+  Meal grill = 1;
+  Meal mind_body_soul = 2;
+  Meal plant_base = 3;
+  Meal service_minute = 4;
+  Meal trattoria = 5;
+  Meal world_flavours = 6;
+}
+
+message GetMenuRequest {}
+message GetMenuResponse { Menu menu = 1; }
+
+service ScraperService {
+  rpc GetMenu(GetMenuRequest) returns (GetMenuResponse);
+}
+
+
