@@ -2,7 +2,7 @@ Daily Dining Hall is a simple service that emails subscribers the uOttawa dining
 
 Website: Suspended for now to reduce operational expenses
 
-## Architecture (brief)
+## Architecture 
 - **Client (Next.js)**: Subscription UI.
 - **Server (Go, microservices via gRPC)**:
   - `scraper`: fetches the daily menu.
